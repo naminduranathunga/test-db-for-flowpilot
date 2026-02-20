@@ -60,6 +60,13 @@ async function startServer() {
     console.log("\n[3/3] Seeding dummy data...");
     await seedData();
 
+    
+  } catch (err) {
+    console.error("Failed to start server:", err.message);
+    // process.exit(1);
+  }
+
+  try {
     // Step 4: Start Express server
     app.listen(PORT, () => {
       console.log(`\n=== Server running on http://localhost:${PORT} ===`);
@@ -70,9 +77,8 @@ async function startServer() {
       console.log(`Products:     http://localhost:${PORT}/api/products`);
       console.log(`Orders:       http://localhost:${PORT}/api/orders`);
     });
-  } catch (err) {
-    console.error("Failed to start server:", err.message);
-    process.exit(1);
+  } catch (error) {
+    console.error("Error starting server:", error.message);
   }
 }
 
